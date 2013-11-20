@@ -10,5 +10,9 @@ public class SplitterTest {
 		String x = "<b>This</b> is a class";
 		assertEquals("verify that it can remove a <>", "This", Splitter.split(x).get(0));
 	}
+	@Test
+	public void testSpit(){
+		Sting url = 
+	}
 
 }

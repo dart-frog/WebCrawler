@@ -9,7 +9,8 @@ public class Splitter {
 	 * @param the line of html you would like to split 
 	 * @return A list of words with out the html tags
 	 */
-	public static List<String> split (String x){
+	public static List<String> split (String x,String url){
+		String iURL = initalURL(url);
 		List<String> sorted = new ArrayList<String>();
 		int d = 0;
 		while ( !(x.substring(d, d+4).equals("body"))){
@@ -25,6 +26,9 @@ public class Splitter {
 			
 			if (x.charAt(i) == '<'){
 				String y = x.substring(i, x.indexOf('>',i) +1);
+				if(y.contains("a ref =")){
+					getLink(y,url,iURL);
+				}
 				x = x.replace(y, "");
 				i=-1;
 			}
@@ -48,5 +52,29 @@ public class Splitter {
 		rough = rough.replace(".", "");
 		return rough;
 	}
+	public static void getLink(String l, String url, String iURL){
+		l = l.replace("<a href=", "");
+		if(l.startsWith("http://")){
+			Children.addChild(l);
+		}
+		else if (l.startsWith("/")){
+			Children.addChild(iURL += l);
+		}
+		else {
+			Children.addChild(url += l); 
+		}
+		
+	}
+	public static String initalURL(String url){
+		url.replace("http://", "");
+		for(int i = 0; i < url.length(); i++){
+			if (url.charAt(i) == '/'){
+				url = url.substring(0, i);
+			}
+		}
+		return "http://" + url;
+		
+	}
+
 
 }
