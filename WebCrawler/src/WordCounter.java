@@ -13,19 +13,17 @@ public class WordCounter {
 	 * @return a counted hashmap
 	 */
 	public static HashMap reader(ArrayList<String> list, HashMap write) {
-		String old = "";
 		int noon = 0;
 		for (int i = 0; i < list.size(); i++){
-			if(write.){
+			if(write.containsKey(list.get(i))){
 				try {
-					old = write.get(list.get(i));
-					noon = Integer.parseInt(old);
+					noon = Integer.parseInt(write.get(list.get(i)).toString());
 				} catch(NumberFormatException e) {
 					System.out.println("\"" + list.get(i) + "\"");
 					throw e;
 				}
 				noon++;
-				write.change(list.get(i), Integer.toString(noon));
+				write.remove(key);
 			}
 			else{
 				if(isLegit(list.get(i))){ 

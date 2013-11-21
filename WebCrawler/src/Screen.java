@@ -124,58 +124,13 @@ public class Screen {
 	 * @return buffer reafer
 	 * @throws IOException
 	 */
-	public static BufferedReader buff() throws IOException{
-		BufferedReader in;
-		in = new BufferedReader(new InputStreamReader(z.openStream()));
-		return in;
-	}
+
 	/**
 	 * turns a url 
 	 * @param b
 	 * @return
 	 * @throws IOException
 	 */
-	public static String parse(BufferedReader b) throws IOException{
-		String htmlLine;
-		StringBuilder massive = new StringBuilder();
-		while ((htmlLine = b.readLine()) != null) {
-			massive.append(htmlLine);
-		}
-		b.close();
-
-		String massiveString = massive.toString();
-		MyHashMap w = new MyHashMap(MAXCHAR);
-		ArrayList<String> fixedText = new ArrayList<String>();
-		fixedText = (ArrayList<String>) Splitter.split(massiveString);
-		w = WordCounter.reader(fixedText, w);
-		ArrayList<KeyValuePairs> x = new ArrayList() ;
-		for(int i = 0; i < w.getKeys().size(); i++){
-			String key = w.getKeys().get(i);
-			String value = Integer.toString(key.length());
-			KeyValuePairs kvp = new KeyValuePairs(key,value);
-			x.add(kvp);
-		}
-		
-		//known
-		x= (ArrayList<KeyValuePairs>) BubbleSort.sort(x);
-		
-		
-		StringBuilder resort = new StringBuilder();
-		for (int i = 0; i < x.size(); i++){
-			String myWord;
-			String myValue;
-			myWord = x.get(i).getKey();
-			myValue = w.get(myWord);
-			resort.append((myWord) + " " + myValue + "\n");
-		}
-		
-		
-		
-		
-		String finalSort = resort.toString();
-		return finalSort;
-
-	}
 	/** 
 	 * creates an error label
 	 * @param the error message you would like to display
