@@ -21,6 +21,7 @@ public class WebsiteTest {
 		Website net = new Website(url);
 		assertEquals("see if it can return a website",adress,net.getWebsite());
 	}
+	@Test
 	public void testCompile(){
 		String adress = "http://en.wikipedia.org/wiki/Benjamin_Britten";
 		URL url = null;
@@ -37,7 +38,7 @@ public class WebsiteTest {
 			System.out.print("ahhh");
 			e.printStackTrace();
 		}
-		assertEquals("see if it can return word count", kjhg,net.getWebsite());
+		assertEquals("see if it can return word count", 7,net.getHashMap().get("gramophone"));
 	}
 
 }

@@ -26,7 +26,7 @@ public class Splitter {
 			
 			if (x.charAt(i) == '<'){
 				String y = x.substring(i, x.indexOf('>',i) +1);
-				if(y.contains("a ref =")){
+				if(y.contains("<a href =")){
 					getLink(y,url,iURL);
 				}
 				x = x.replace(y, "");
@@ -66,7 +66,7 @@ public class Splitter {
 		
 	}
 	public static String initalURL(String url){
-		url.replace("http://", "");
+		url = url.replace("http://", "");
 		for(int i = 0; i < url.length(); i++){
 			if (url.charAt(i) == '/'){
 				url = url.substring(0, i);
