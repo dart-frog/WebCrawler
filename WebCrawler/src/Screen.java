@@ -144,13 +144,6 @@ public class Screen {
 	 */
 	public void action() {
 		String finalSort = null;
-		try {
-			finalSort = parse(buff());
-		} catch (IOException e) {
-			String q = e.getMessage();
-			createErrorLabel(q);
-			
-		}
 		contentPane = new JPanel();
 		wordFrequencyTextArea = new JTextArea(finalSort);
 		wordFrequencyTextArea.setFont(new Font("Serif", Font.ITALIC, 16));

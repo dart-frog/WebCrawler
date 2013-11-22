@@ -23,13 +23,14 @@ public class WordCounter {
 					throw e;
 				}
 				noon++;
-				write.remove(key);
+				write.remove(list.get(i));
+				write.put(list.get(i), noon);
 			}
 			else{
 				if(isLegit(list.get(i))){ 
 				//String low = list.get(i).toLowerCase();
 				String low = list.get(i);
-				write.set(low, "1");
+				write.put(low, 1);
 				}
 			}
 		}

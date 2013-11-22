@@ -8,11 +8,12 @@ public class SplitterTest {
 	@Test
 	public void test() {
 		String x = "<b>This</b> is a class";
-		assertEquals("verify that it can remove a <>", "This", Splitter.split(x).get(0));
+		
+		assertEquals("verify that it can remove a <>", "This", Splitter.split(x,"").get(0));
 	}
 	@Test
 	public void testSpit(){
-		Sting url = 
+		
 	}
 
 }

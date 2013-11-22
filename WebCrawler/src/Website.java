@@ -19,7 +19,7 @@ public class Website {
 	public HashMap getHashMap(){
 		return hm;
 	}
-	public HashMap compile() throws IOException{
+	public void compile() throws IOException{
 		BufferedReader in;
 		in = new BufferedReader(new InputStreamReader(url.openStream()));
 		String htmlLine;
@@ -34,7 +34,7 @@ public class Website {
 		fixedText = (ArrayList<String>) Splitter.split(massiveString,getWebsite());
 		HashMap w = new HashMap();
 		w = WordCounter.reader(fixedText, w);
-		return w;
+		hm = w;
 
 	}
 }
