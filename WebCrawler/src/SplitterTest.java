@@ -9,12 +9,7 @@ import org.junit.Test;
 
 public class SplitterTest {
 
-	@Test
-	public void test() {
-		String x = "<b>This</b> is a class";
-		
-		assertEquals("verify that it can remove a <>", "This", Splitter.split(x,"").get(0));
-	}
+
 	@Test
 	public void testSpit(){
 		String adress = "http://en.wikipedia.org/wiki/Benjamin_Britten";
@@ -32,7 +27,7 @@ public class SplitterTest {
 			System.out.print("ahhh");
 			e.printStackTrace();
 		}
-		assertEquals("can get children", "ahhhhhh", Children.getChild());
+		assertEquals("can get children", "http://en.wikipedia.org/wiki/Wikipedia:Featured_articles", Children.getChild());
 	}
 
 }

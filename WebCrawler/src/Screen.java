@@ -125,12 +125,6 @@ public class Screen {
 	 * @throws IOException
 	 */
 
-	/**
-	 * turns a url 
-	 * @param b
-	 * @return
-	 * @throws IOException
-	 */
 	/** 
 	 * creates an error label
 	 * @param the error message you would like to display
@@ -161,5 +155,15 @@ public class Screen {
 		contentPane.add(textAreaScrollPane);
 		frame.setContentPane(contentPane);
 		frame.pack();
+	}
+	public static ArrayList<Website> Crawl(URL parent){
+		Website first  = 
+		for (int i = 0; i <= 30-1; i++){
+			
+		}
+		
+		return null;
+		
+		
 	}
 }

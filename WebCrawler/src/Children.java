@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 
 public class Children {
-	public static ArrayList<String> x;
+	public static ArrayList<String> x = new ArrayList();
 	public static int index=0;
 	public static void addChild(String c){
 		x.add(c);

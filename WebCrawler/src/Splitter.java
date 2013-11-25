@@ -26,7 +26,7 @@ public class Splitter {
 			
 			if (x.charAt(i) == '<'){
 				String y = x.substring(i, x.indexOf('>',i) +1);
-				if(y.contains("<a href =")){
+				if(y.contains("<a href=\"")){
 					getLink(y,url,iURL);
 				}
 				x = x.replace(y, "");
@@ -52,16 +52,24 @@ public class Splitter {
 		rough = rough.replace(".", "");
 		return rough;
 	}
-	public static void getLink(String l, String url, String iURL){
-		l = l.replace("<a href=", "");
-		if(l.startsWith("http://")){
-			Children.addChild(l);
+	public static void getLink(String child, String url, String iURL){
+		child = child.replace("<a href=\"", "");
+		if(child.startsWith("http://")){
+			Children.addChild(child);
 		}
-		else if (l.startsWith("/")){
-			Children.addChild(iURL += l);
+		else if (child.startsWith("/")){
+			for(int i = 0; i < child.length(); i++){
+				if (child.charAt(i) == '\"'){
+					child = child.substring(0, i);
+				}
+			}
+			Children.addChild(iURL + child);
+		}
+		else if (child.startsWith("#")){
+			
 		}
 		else {
-			Children.addChild(url += l); 
+			Children.addChild(url += child); 
 		}
 		
 	}
