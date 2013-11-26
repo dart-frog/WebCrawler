@@ -1,3 +1,4 @@
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -8,8 +9,9 @@ public class Splitter {
 	 * Splits a line into words and removes html tags
 	 * @param the line of html you would like to split 
 	 * @return A list of words with out the html tags
+	 * @throws MalformedURLException 
 	 */
-	public static List<String> split (String x,String url){
+	public static List<String> split (String x,String url) throws MalformedURLException{
 		String iURL = initalURL(url);
 		List<String> sorted = new ArrayList<String>();
 		int d = 0;
@@ -52,7 +54,7 @@ public class Splitter {
 		rough = rough.replace(".", "");
 		return rough;
 	}
-	public static void getLink(String child, String url, String iURL){
+	public static void getLink(String child, String url, String iURL) throws MalformedURLException{
 		child = child.replace("<a href=\"", "");
 		if(child.startsWith("http://")){
 			Children.addChild(child);

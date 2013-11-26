@@ -11,7 +11,7 @@ public class SplitterTest {
 
 
 	@Test
-	public void testSpit(){
+	public void testSpit() throws MalformedURLException{
 		String adress = "http://en.wikipedia.org/wiki/Benjamin_Britten";
 		URL url = null;
 		try {
@@ -19,6 +19,7 @@ public class SplitterTest {
 		} catch (MalformedURLException e) {
 			e.printStackTrace();
 		} 
+		
 		Website net = new Website(url);
 		try {
 			net.compile();
@@ -27,7 +28,7 @@ public class SplitterTest {
 			System.out.print("ahhh");
 			e.printStackTrace();
 		}
-		assertEquals("can get children", "http://en.wikipedia.org/wiki/Wikipedia:Featured_articles", Children.getChild());
+		assertEquals("can get children", new URL("http://en.wikipedia.org/wiki/Wikipedia:Featured_articles"), Children.getChild());
 	}
 
 }

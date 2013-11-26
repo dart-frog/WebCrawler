@@ -12,14 +12,17 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Timer;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
+
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
@@ -29,11 +32,13 @@ public class Screen {
 	public static URL z = null; 
 	private static String URLstring = "";
 	JPanel contentPane;
-	final static String READER = "Card where words are displayed";
-	final static String TYPER = "Where you type in you URL";
+	static Timer time;
+	static int progress;
+	static JProgressBar jPB;
 	private JTextField inputTextField;
 	private JTextArea wordFrequencyTextArea;
 	private static JFrame frame;
+	private static ArrayList<Website> webBox;
 	/**
 	 * creates a input box and a enter button
 	 * @throws IOException
@@ -49,6 +54,7 @@ public class Screen {
 		SubmitButtonActionListener v = new SubmitButtonActionListener(this.inputTextField, this);
 		enter.addActionListener(v);
 		inputPanel.add(enter);
+		
 
 		
 		contentPane = new JPanel();
@@ -99,7 +105,7 @@ public class Screen {
 	 * @throws IOException
 	 */
 	public static void setUp() throws IOException {
-		frame = new JFrame("LeaderBoard");
+		frame = new JFrame("WebCrawler");
 		// frame.setBounds(50, 50, 600, 400);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Screen scr = new Screen();
@@ -135,11 +141,22 @@ public class Screen {
 	}
 	/**
 	 * Displays the text box with the counted words
+	 * @throws IOException 
 	 */
-	public void action() {
-		String finalSort = null;
+	public void action() throws IOException{
 		contentPane = new JPanel();
-		wordFrequencyTextArea = new JTextArea(finalSort);
+		jPB = new JProgressBar(0,30);
+		jPB.setValue(0);
+		jPB.setStringPainted(true);
+		contentPane.add(jPB);
+		frame.setContentPane(contentPane);
+		frame.pack();
+		Crawl();
+	}
+	public void display() {
+		
+		contentPane = new JPanel();
+		wordFrequencyTextArea = new JTextArea();
 		wordFrequencyTextArea.setFont(new Font("Serif", Font.ITALIC, 16));
 		wordFrequencyTextArea.setLineWrap(true);
 		wordFrequencyTextArea.setWrapStyleWord(true);
@@ -156,17 +173,28 @@ public class Screen {
 		frame.setContentPane(contentPane);
 		frame.pack();
 	}
-	public static ArrayList<Website> Crawl(URL parent) throws IOException{
-		ArrayList<Website> webBox = new ArrayList();
+	public static  void Crawl() throws IOException{
+		webBox = new ArrayList();
 		Website x = new Website(z);
 		x.compile();
 		webBox.add(x);
-		for (int i = 0; i <= 30-1; i++){
-			Website n = new Website(Children.getChild());
-			n.compile();
+		
+		time = new Timer();
+		for (int i = 1; i <= 31; i++) {
+			time.schedule(new CrawlTask(), i*5000);
 		}
-		return webBox;
+				
 		
 		
 	}
+	public static void subcrawl() throws IOException{
+		Website n = new Website(Children.getChild());
+		n.compile();
+		webBox.add(n);
+	}
+	public static void update(){
+		progress++;
+		jPB.setValue(progress);
+	}
+	
 }
