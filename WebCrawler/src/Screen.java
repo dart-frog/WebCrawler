@@ -156,13 +156,16 @@ public class Screen {
 		frame.setContentPane(contentPane);
 		frame.pack();
 	}
-	public static ArrayList<Website> Crawl(URL parent){
-		Website first  = 
+	public static ArrayList<Website> Crawl(URL parent) throws IOException{
+		ArrayList<Website> webBox = new ArrayList();
+		Website x = new Website(z);
+		x.compile();
+		webBox.add(x);
 		for (int i = 0; i <= 30-1; i++){
-			
+			Website n = new Website(Children.getChild());
+			n.compile();
 		}
-		
-		return null;
+		return webBox;
 		
 		
 	}
