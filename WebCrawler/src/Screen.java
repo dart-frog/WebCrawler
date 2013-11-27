@@ -35,6 +35,7 @@ public class Screen {
 	static Timer time;
 	static int progress;
 	static JProgressBar jPB;
+	static JLabel prog;
 	private JTextField inputTextField;
 	private JTextArea wordFrequencyTextArea;
 	private static JFrame frame;
@@ -144,11 +145,13 @@ public class Screen {
 	 * @throws IOException 
 	 */
 	public void action() throws IOException{
+		prog = new JLabel("0");
 		contentPane = new JPanel();
 		jPB = new JProgressBar(0,30);
 		jPB.setValue(0);
 		jPB.setStringPainted(true);
 		contentPane.add(jPB);
+		contentPane.add(prog);
 		frame.setContentPane(contentPane);
 		frame.pack();
 		Crawl();
@@ -194,7 +197,9 @@ public class Screen {
 	}
 	public static void update(){
 		progress++;
+		prog = new JLabel(Integer.toString(progress));
 		jPB.setValue(progress);
+		frame.pack();
 	}
 	
 }
