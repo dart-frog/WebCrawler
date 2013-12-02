@@ -1,4 +1,5 @@
 import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -84,6 +85,10 @@ public class Splitter {
 		}
 		return "http://" + url;
 		
+	}
+	public static boolean isNotInRobo(String iurl) throws MalformedURLException{
+		URL rbt = new URL(iurl);
+		return false;
 	}
 
 

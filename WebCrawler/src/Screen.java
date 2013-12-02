@@ -147,7 +147,7 @@ public class Screen {
 	public void action() throws IOException{
 		prog = new JLabel("0");
 		contentPane = new JPanel();
-		jPB = new JProgressBar(0,30);
+		jPB = new JProgressBar(0,32);
 		jPB.setValue(0);
 		jPB.setStringPainted(true);
 		contentPane.add(jPB);
@@ -181,9 +181,11 @@ public class Screen {
 		Website x = new Website(z);
 		x.compile();
 		webBox.add(x);
+		update();
 		
 		time = new Timer();
 		for (int i = 1; i <= 31; i++) {
+			System.out.print(i + " ");
 			time.schedule(new CrawlTask(), i*5000);
 		}
 				
@@ -200,6 +202,9 @@ public class Screen {
 		prog = new JLabel(Integer.toString(progress));
 		jPB.setValue(progress);
 		frame.pack();
+		if (progress == 32){
+			new Screen().display();
+		}
 	}
 	
 }

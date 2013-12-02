@@ -4,11 +4,13 @@ import java.util.TimerTask;
 class CrawlTask extends TimerTask {
     public void run() {
     	try {
-			Screen.subcrawl();
+
+    		Screen.subcrawl();
+			
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
     	Screen.update();
-    	System.exit(0); 
+    	this.cancel();
     }
   }
