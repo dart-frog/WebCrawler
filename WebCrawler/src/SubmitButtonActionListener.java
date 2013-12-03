@@ -24,6 +24,7 @@ public class SubmitButtonActionListener implements ActionListener{
 		
 		try {
 			Screen.setURL(txt);
+			System.out.print("ahhh");
 			scr.action();
 		} catch (MalformedURLException e) {
 			String x = e.getMessage();

@@ -39,6 +39,7 @@ public class Screen {
 	private JTextField inputTextField;
 	private JTextArea wordFrequencyTextArea;
 	private static JFrame frame;
+	private static String keyword;
 	private static ArrayList<Website> webBox;
 	/**
 	 * creates a input box and a enter button
@@ -157,22 +158,19 @@ public class Screen {
 		Crawl();
 	}
 	public void display() {
-		
+		JPanel inputPanel = new JPanel();
+		inputTextField = new JTextField();
+		inputTextField.setFont(new Font("Serif", Font.ITALIC, 16));
+		inputTextField.setColumns(20);
+		inputPanel.add(inputTextField);
+
+		JButton enter = new JButton("enter");
+		CombButtonActionListener v = new CombButtonActionListener(this.inputTextField, this);
+		enter.addActionListener(v);
+		inputPanel.add(enter);
 		contentPane = new JPanel();
-		wordFrequencyTextArea = new JTextArea();
-		wordFrequencyTextArea.setFont(new Font("Serif", Font.ITALIC, 16));
-		wordFrequencyTextArea.setLineWrap(true);
-		wordFrequencyTextArea.setWrapStyleWord(true);
-		JScrollPane textAreaScrollPane = new JScrollPane(wordFrequencyTextArea);
-		textAreaScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-		textAreaScrollPane.setPreferredSize(new Dimension(400, 600));
-		
-		try {
-			createCards();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		contentPane.add(textAreaScrollPane);
+		contentPane.setLayout(new GridLayout(0, 1));
+		contentPane.add(inputPanel);
 		frame.setContentPane(contentPane);
 		frame.pack();
 	}
@@ -185,7 +183,6 @@ public class Screen {
 		
 		time = new Timer();
 		for (int i = 1; i <= 31; i++) {
-			System.out.print(i + " ");
 			time.schedule(new CrawlTask(), i*5000);
 		}
 				
@@ -202,9 +199,31 @@ public class Screen {
 		prog = new JLabel(Integer.toString(progress));
 		jPB.setValue(progress);
 		frame.pack();
-		if (progress == 32){
+		System.out.println(progress + " ");
+		if (progress < 31){
 			new Screen().display();
 		}
+	}
+
+	public void reply() {
+		String occur = "";
+		for (int i = 0; i < webBox.size(); i++)	{
+			Website net = webBox.get(i);
+			occur += (net.getWebsite() + " " + net.occurrence(keyword) + "\n");
+		}
+		contentPane = new JPanel();
+		wordFrequencyTextArea = new JTextArea(occur);
+		wordFrequencyTextArea.setFont(new Font("Serif", Font.ITALIC, 16));
+		wordFrequencyTextArea.setLineWrap(true);
+		wordFrequencyTextArea.setWrapStyleWord(true);
+		JScrollPane textAreaScrollPane = new JScrollPane(wordFrequencyTextArea);
+		textAreaScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+		textAreaScrollPane.setPreferredSize(new Dimension(400, 600));
+		contentPane.add(textAreaScrollPane);
+		frame.setContentPane(contentPane);
+		frame.pack();
+		
+		
 	}
 	
 }

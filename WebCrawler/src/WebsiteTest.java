@@ -38,7 +38,7 @@ public class WebsiteTest {
 			System.out.print("ahhh");
 			e.printStackTrace();
 		}
-		assertEquals("see if it can return word count", 7,net.getHashMap().get("gramophone"));
+		assertEquals("see if it can return word count", "7",net.occurrence("gramophone"));
 	}
 
 }

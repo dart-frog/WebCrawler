@@ -16,8 +16,8 @@ public class Website {
 	public String getWebsite(){
 		return url.toString();
 	}
-	public HashMap getHashMap(){
-		return hm;
+	public String occurrence(String key){
+		return hm.get(key).toString();
 	}
 	public void compile() throws IOException{
 		BufferedReader in;
