@@ -39,7 +39,7 @@ public class Screen {
 	private JTextField inputTextField;
 	private JTextArea wordFrequencyTextArea;
 	private static JFrame frame;
-	private static String keyword;
+	private final static int LINKSCRAWLED = 1;
 	private static ArrayList<Website> webBox;
 	/**
 	 * creates a input box and a enter button
@@ -148,7 +148,7 @@ public class Screen {
 	public void action() throws IOException{
 		prog = new JLabel("0");
 		contentPane = new JPanel();
-		jPB = new JProgressBar(0,32);
+		jPB = new JProgressBar(0,LINKSCRAWLED);
 		jPB.setValue(0);
 		jPB.setStringPainted(true);
 		contentPane.add(jPB);
@@ -173,7 +173,6 @@ public class Screen {
 		contentPane.setLayout(new GridLayout(0, 1));
 		contentPane.add(inputPanel);
 		frame.setContentPane(contentPane);
-		frame.pack();
 	}
 	public static  void Crawl() throws IOException{
 		webBox = new ArrayList();
@@ -183,7 +182,7 @@ public class Screen {
 		update();
 		
 		time = new Timer();
-		for (int i = 1; i <= 31; i++) {
+		for (int i = 1; i <= LINKSCRAWLED; i++) {
 			time.schedule(new CrawlTask(), i*5000);
 		}
 				
@@ -197,16 +196,17 @@ public class Screen {
 	}
 	public static void update(){
 		progress++;
-		prog = new JLabel(Integer.toString(progress));
+		prog.setText(Integer.toString(progress));
 		jPB.setValue(progress);
 		frame.pack();
 		System.out.println(progress + " ");
-		if (progress < 31){
+		if (progress > LINKSCRAWLED){
 			new Screen().display();
+			frame.pack();
 		}
 	}
 
-	public void reply() {
+	public void reply(String keyword) {
 		String occur = "";
 		for (int i = 0; i < webBox.size(); i++)	{
 			Website net = webBox.get(i);
@@ -221,6 +221,7 @@ public class Screen {
 		textAreaScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 		textAreaScrollPane.setPreferredSize(new Dimension(400, 600));
 		contentPane.add(textAreaScrollPane);
+		display();
 		frame.setContentPane(contentPane);
 		frame.pack();
 		

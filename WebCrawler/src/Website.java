@@ -17,7 +17,12 @@ public class Website {
 		return url.toString();
 	}
 	public String occurrence(String key){
-		return hm.get(key).toString();
+		if (hm.containsKey(key)){
+			return hm.get(key).toString();
+		}
+		else {
+			return "0";
+		}
 	}
 	public void compile() throws IOException{
 		BufferedReader in;

@@ -20,6 +20,6 @@ public class CombButtonActionListener implements ActionListener{
 	
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		scr.reply();
+		scr.reply(inputText.getText());
 	}
 }
