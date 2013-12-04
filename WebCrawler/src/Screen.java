@@ -156,6 +156,7 @@ public class Screen {
 		frame.setContentPane(contentPane);
 		frame.pack();
 		Crawl();
+		System.out.print("made it");
 	}
 	public void display() {
 		JPanel inputPanel = new JPanel();
