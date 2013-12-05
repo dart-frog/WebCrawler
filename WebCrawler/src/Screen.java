@@ -20,11 +20,14 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JProgressBar;
 import javax.swing.JScrollPane;
+import javax.swing.JSplitPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
+
+import net.miginfocom.swing.MigLayout;
 
 public class Screen {
 
@@ -32,6 +35,7 @@ public class Screen {
 	public static URL z = null; 
 	private static String URLstring = "";
 	JPanel contentPane;
+	JPanel inputPane;
 	static Timer time;
 	static int progress;
 	static JProgressBar jPB;
@@ -39,7 +43,7 @@ public class Screen {
 	private JTextField inputTextField;
 	private JTextArea wordFrequencyTextArea;
 	private static JFrame frame;
-	private final static int LINKSCRAWLED = 1;
+	private final static int LINKSCRAWLED = 2;
 	private static ArrayList<Website> webBox;
 	/**
 	 * creates a input box and a enter button
@@ -61,6 +65,8 @@ public class Screen {
 		
 		contentPane = new JPanel();
 		contentPane.setLayout(new GridLayout(0, 1));
+		//MigLayout migOut = new MigLayout("wrap 5");
+		//migLay.setLayout(migOut);
 		contentPane.add(inputPanel);
 		
 		
@@ -157,19 +163,18 @@ public class Screen {
 		System.out.print("made it");
 	}
 	public void display() {
-		JPanel inputPanel = new JPanel();
+		inputPane = new JPanel();
 		inputTextField = new JTextField();
 		inputTextField.setFont(new Font("Serif", Font.ITALIC, 16));
 		inputTextField.setColumns(20);
-		inputPanel.add(inputTextField);
+		inputPane.add(inputTextField);
 
 		JButton enter = new JButton("enter");
 		CombButtonActionListener v = new CombButtonActionListener(this.inputTextField, this);
 		enter.addActionListener(v);
-		inputPanel.add(enter);
+		inputPane.add(enter);
 		contentPane = new JPanel();
-		contentPane.setLayout(new GridLayout(0, 1));
-		contentPane.add(inputPanel);
+		contentPane.add(inputPane);
 		frame.setContentPane(contentPane);
 	}
 	public static  void Crawl() throws IOException{
@@ -180,7 +185,7 @@ public class Screen {
 		update();
 		
 		time = new Timer();
-		for (int i = 1; i <= LINKSCRAWLED; i++) {
+		for (int i = 1; i < LINKSCRAWLED; i++) {
 			time.schedule(new CrawlTask(), i*5000);
 		}
 				
@@ -198,7 +203,7 @@ public class Screen {
 		jPB.setValue(progress);
 		frame.pack();
 		System.out.println(progress + " ");
-		if (progress > LINKSCRAWLED){
+		if (progress > LINKSCRAWLED -1){
 			new Screen().display();
 			frame.pack();
 		}
@@ -211,6 +216,7 @@ public class Screen {
 			occur += (net.getWebsite() + " " + net.occurrence(keyword) + "\n");
 		}
 		contentPane = new JPanel();
+		JSplitPane bananna = new JSplitPane();
 		wordFrequencyTextArea = new JTextArea(occur);
 		wordFrequencyTextArea.setFont(new Font("Serif", Font.ITALIC, 16));
 		wordFrequencyTextArea.setLineWrap(true);
@@ -218,9 +224,16 @@ public class Screen {
 		JScrollPane textAreaScrollPane = new JScrollPane(wordFrequencyTextArea);
 		textAreaScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 		textAreaScrollPane.setPreferredSize(new Dimension(400, 600));
-		display();
 		contentPane.add(textAreaScrollPane);
-		frame.setContentPane(contentPane);
+		JPanel fullPane = new JPanel();
+		
+		MigLayout migOut = new MigLayout("wrap 2");
+		fullPane.setLayout(migOut);
+		//display();
+		fullPane.add(inputPane,"wrap");
+		fullPane.add(contentPane);
+		
+		frame.setContentPane(fullPane);
 		frame.pack();
 		
 		
