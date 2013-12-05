@@ -62,7 +62,6 @@ public class Screen {
 		contentPane = new JPanel();
 		contentPane.setLayout(new GridLayout(0, 1));
 		contentPane.add(inputPanel);
-		//contentPane.add(myCards);
 		
 		
 		try{
@@ -108,7 +107,6 @@ public class Screen {
 	 */
 	public static void setUp() throws IOException {
 		frame = new JFrame("WebCrawler");
-		// frame.setBounds(50, 50, 600, 400);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		Screen scr = new Screen();
 		scr.createCards();
@@ -220,8 +218,8 @@ public class Screen {
 		JScrollPane textAreaScrollPane = new JScrollPane(wordFrequencyTextArea);
 		textAreaScrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
 		textAreaScrollPane.setPreferredSize(new Dimension(400, 600));
-		contentPane.add(textAreaScrollPane);
 		display();
+		contentPane.add(textAreaScrollPane);
 		frame.setContentPane(contentPane);
 		frame.pack();
 		
