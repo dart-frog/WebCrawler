@@ -216,7 +216,6 @@ public class Screen {
 			occur += (net.getWebsite() + " " + net.occurrence(keyword) + "\n");
 		}
 		contentPane = new JPanel();
-		JSplitPane bananna = new JSplitPane();
 		wordFrequencyTextArea = new JTextArea(occur);
 		wordFrequencyTextArea.setFont(new Font("Serif", Font.ITALIC, 16));
 		wordFrequencyTextArea.setLineWrap(true);
@@ -236,7 +235,8 @@ public class Screen {
 		frame.setContentPane(fullPane);
 		frame.pack();
 		
-		
 	}
+	
+
 	
 }
