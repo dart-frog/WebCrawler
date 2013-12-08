@@ -17,5 +17,9 @@ public class Children {
 	public static URL getChild(int i){
 		return x.get(i);	
 	}
+	public static int amountOfChildren(){
+		return x.size();
+		
+	}
 	
 }

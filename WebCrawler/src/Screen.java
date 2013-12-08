@@ -43,7 +43,7 @@ public class Screen {
 	private JTextField inputTextField;
 	private JTextArea wordFrequencyTextArea;
 	private static JFrame frame;
-	private final static int LINKSCRAWLED = 2;
+	private  static int LINKSCRAWLED = 2;
 	private static ArrayList<Website> webBox;
 	/**
 	 * creates a input box and a enter button
@@ -183,7 +183,9 @@ public class Screen {
 		x.compile();
 		webBox.add(x);
 		update();
-		
+		if (Children.amountOfChildren() < 30){
+			LINKSCRAWLED = Children.amountOfChildren(); 	
+		}
 		time = new Timer();
 		for (int i = 1; i < LINKSCRAWLED; i++) {
 			time.schedule(new CrawlTask(), i*5000);
