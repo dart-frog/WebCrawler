@@ -33,7 +33,7 @@ public class Splitter {
 			
 			if (x.charAt(i) == '<'){
 				String y = x.substring(i, x.indexOf('>',i) +1);
-				if(y.contains("<a href=\"")){
+				if(y.contains("<a href=\"")&& Robot.isNotRobot(url)){
 					getLink(y,url,iURL);
 				}
 				x = x.replace(y, "");
@@ -90,21 +90,5 @@ public class Splitter {
 		return "http://" + url;
 		
 	}
-	public static boolean isNotInRobo(String iurl) throws IOException{
-		URL rbt = new URL(iurl + "robots.txt");
-		BufferedReader in;
-		in = new BufferedReader(new InputStreamReader(rbt.openStream()));
-		String htmlLine;
-		StringBuilder massive = new StringBuilder();
-		while ((htmlLine = in.readLine()) != null) {
-			massive.append(htmlLine);
-		}
-		in.close();
-		String massiveString = massive.toString();
-		
-		
-		return false;
-	}
-
 
 }

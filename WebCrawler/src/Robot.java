@@ -25,7 +25,12 @@ public class Robot {
 		in.close();
 	}
 	
-	public static void isRobot(){
-		
+	public static boolean isNotRobot(String url){
+		for (int i = 0; i < ban.size()- 1; i++){
+			if (url == ban.get(i)){
+				return false;
+			}
+		}
+		return true;
 	}
 }
