@@ -43,7 +43,7 @@ public class Screen {
 	private JTextField inputTextField;
 	private JTextArea wordFrequencyTextArea;
 	private static JFrame frame;
-	private  static int LINKSCRAWLED = 2;
+	private  static int LINKSCRAWLED = 5;
 	private static ArrayList<Website> webBox;
 	/**
 	 * creates a input box and a enter button
@@ -212,6 +212,7 @@ public class Screen {
 	}
 
 	public void reply(String keyword) {
+		sort(keyword);
 		String occur = "";
 		for (int i = 0; i < webBox.size(); i++)	{
 			Website net = webBox.get(i);
@@ -237,6 +238,17 @@ public class Screen {
 		frame.setContentPane(fullPane);
 		frame.pack();
 		
+	}
+	public void sort(String key){
+		for (int j = 0; j < (webBox.size()-1); j++){
+			for (int i = 0; i < (webBox.size() -1); i++){
+				if (Integer.parseInt(webBox.get(i).occurrence(key)) < Integer.parseInt(webBox.get(i+1).occurrence(key))){
+					Website x= webBox.get(i);  
+					webBox.set(i, webBox.get(i+1));
+					webBox.set(i+ 1, x);
+				}
+			}
+		}
 	}
 	
 
