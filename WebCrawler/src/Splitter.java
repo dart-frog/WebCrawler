@@ -13,10 +13,11 @@ public class Splitter {
 	 * Splits a line into words and removes html tags
 	 * @param the line of html you would like to split 
 	 * @return A list of words with out the html tags
-	 * @throws MalformedURLException 
+	 * @throws IOException 
 	 */
-	public static List<String> split (String x,String url) throws MalformedURLException{
+	public static List<String> split (String x,String url) throws IOException{
 		String iURL = initalURL(url);
+		Robot.compile(iURL);
 		List<String> sorted = new ArrayList<String>();
 		int d = 0;
 		while ( !(x.substring(d, d+4).equals("body"))){
